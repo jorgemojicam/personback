@@ -8,9 +8,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
  
 // GET
-app.get('/tasks', async (req, res) => {
+app.get('/user', async (req, res) => {
     try {
-        const result = await db.pool.query("select * from tasks");
+        const result = await db.pool.query("select * from user");
         res.send(result);
     } catch (err) {
         throw err;
@@ -18,7 +18,7 @@ app.get('/tasks', async (req, res) => {
 });
  
 // POST
-app.post('/tasks', async (req, res) => {
+app.post('/user', async (req, res) => {
     let task = req.body;
     try {
         const result = await db.pool.query("insert into tasks (description) values (?)", [task.description]);
@@ -28,7 +28,7 @@ app.post('/tasks', async (req, res) => {
     }
 });
  
-app.put('/tasks', async (req, res) => {
+app.put('/user', async (req, res) => {
     let task = req.body;
     try {
         const result = await db.pool.query("update tasks set description = ?, completed = ? where id = ?", [task.description, task.completed, task.id]);
@@ -38,7 +38,7 @@ app.put('/tasks', async (req, res) => {
     } 
 });
  
-app.delete('/tasks', async (req, res) => {
+app.delete('/user', async (req, res) => {
     let id = req.query.id;
     try {
         const result = await db.pool.query("delete from tasks where id = ?", [id]);
