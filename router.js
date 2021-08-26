@@ -1,7 +1,7 @@
 const express = require('express');
 const router = new express.Router();
-//const employees = require('../controllers/employees.js');
+const user = require('./controllers/user');
 
-//router.route('/employees/:id?').get(employees.get).post(employees.post);
+router.route('/user/:id?').get(user.get).post(user.post);
 
 module.exports = router;

@@ -3,10 +3,10 @@ const webServer = require('./server.js');
 startup();
 
 async function startup() {
-  console.log('Starting application');
+  console.log('Arrancando applicacion');
 
   try {
-    console.log('Initializing web server module');
+    console.log('Inicializando modulo servidor web');
     await webServer.initialize();
   } catch (err) {
     console.error(err);
