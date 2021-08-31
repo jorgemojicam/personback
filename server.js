@@ -21,7 +21,7 @@ function initialize() {
     });
 
     app.use(bodyParser.urlencoded({ extended: false }))
-    app.use(bodyParser.json())
+    app.use(bodyParser.json()) 
 
     app.use('/api', router);
 
@@ -44,4 +44,4 @@ function initialize() {
   });
 }
 
-module.exports.initialize = initialize;
+module.exports.initialize = initialize; 

@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 
 async function get(context) {
     let sqlquery = 'select * from cuentaacceso'
-    let arrayWhere = []    
+    let arrayWhere = []
     try {
         const binds = {};
         if (context.id) {
@@ -18,10 +18,13 @@ async function get(context) {
         if (context.username) {
             binds.username = context.username;
             arrayWhere.push(" username = :username ");
-        }  
-        const strQuery = `${sqlquery} where ${arrayWhere.join["and"]}`
-
-        const result = await db.pool.query(strQuery);
+        }
+        if (arrayWhere.length > 0) {
+            sqlquery += " where "
+        } else {
+            sqlquery += arrayWhere.join["and"]
+        }
+        const result = await db.pool.query(sqlquery);
         return result;
     } catch (err) {
         throw err;
@@ -45,11 +48,11 @@ module.exports.create = create;
 
 async function auth(context) {
     let sqlquery = 'select username,password from cuentaacceso'
-   
+
     try {
-        if (context.username) {    
+        if (context.username) {
             sqlquery += ` where username = "${context.username}" `;
-        }     
+        }
         const result = await db.pool.query(sqlquery);
         return result;
     } catch (err) {
@@ -59,9 +62,11 @@ async function auth(context) {
 module.exports.auth = auth;
 
 async function generateAuthToken() {
-    
-    const token = jwt.sign({ _id: this._id }, "*/.+\fMd|-*g0j*|-*hgJfg*|-*g1g*|-*fhChm*|-*4*/.\*");
-    console.log("key -->> ", process.env.JWTPRIVATEKEY)
+
+    const token = jwt.sign({ _id: this._id }, "*/.+fMd|-*g0j*|-*hgJfg*|-*g1g*|-*fhChm*|-*4*/.*");
+    console.log("key -->> ", token)
     return token;
 };
 module.exports.generateAuthToken = generateAuthToken;
+
+
