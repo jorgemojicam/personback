@@ -20,9 +20,7 @@ async function get(context) {
             arrayWhere.push(" username = :username ");
         }
         if (arrayWhere.length > 0) {
-            sqlquery += " where "
-        } else {
-            sqlquery += arrayWhere.join["and"]
+            sqlquery += ` where ${arrayWhere.join(" and ")}`
         }
         const result = await db.pool.query(sqlquery);
         return result;

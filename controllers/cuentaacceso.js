@@ -2,7 +2,6 @@ const cuentaacceso = require('../db/cuentaacceso');
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-
 async function get(req, res, next) {
     try {
         const context = {};
