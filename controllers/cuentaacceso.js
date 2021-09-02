@@ -35,19 +35,23 @@ module.exports.post = post;
 
 async function auth(req, res) {
     try {
-
         const user = await cuentaacceso.auth(req.body);
-        if (!user) return res.status(400).send("Invalid email or password");
+        if (!user) return res.status(400).send("Usuario o contraseña incorrecto");
 
         const validPassword = await bcrypt.compare(
             req.body.password,
             user[0].password
         );
+        delete user[0].password
         if (!validPassword)
-            return res.status(400).send("Invalid email or password");
+            return res.status(401).send("Invalid email or password");
 
         const token = await cuentaacceso.generateAuthToken();
-        res.send(token);
+        
+        res.send({
+            AccessToken: token,
+            datauser: user[0]
+        });
     } catch (error) {
         console.log(error);
         res.send("An error occured");
@@ -70,6 +74,5 @@ async function checkJWT(req, res, next) {
         return res.status(401).send({ message: 'Unauthorized' });
     }
 };
-
 module.exports.checkJWT = checkJWT;
 

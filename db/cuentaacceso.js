@@ -45,7 +45,8 @@ async function create(data) {
 module.exports.create = create;
 
 async function auth(context) {
-    let sqlquery = 'select username,password from cuentaacceso'
+    let sqlquery = `select username,password,idroles,email,firts_name,last_name from cuentaacceso cas 
+                    INNER JOIN users us ON cas.iduser = us.id`
 
     try {
         if (context.username) {
@@ -61,8 +62,10 @@ module.exports.auth = auth;
 
 async function generateAuthToken() {
 
-    const token = jwt.sign({ _id: this._id }, "*/.+fMd|-*g0j*|-*hgJfg*|-*g1g*|-*fhChm*|-*4*/.*");
-    console.log("key -->> ", token)
+    const token = jwt.sign({ _id: this._id }, "Stack", {
+        expiresIn: "10h"
+    }, "*/.+fMd|-*g0j*|-*hgJfg*|-*g1g*|-*fhChm*|-*4*/.*");
+
     return token;
 };
 module.exports.generateAuthToken = generateAuthToken;
