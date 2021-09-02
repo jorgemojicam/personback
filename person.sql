@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `cuentaacceso` (
   PRIMARY KEY (`id`),
   KEY `FKUSER` (`iduser`),
   KEY `FK_cuentaacceso_roles` (`idroles`),
-  CONSTRAINT `FKUSER` FOREIGN KEY (`iduser`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FKUSER` FOREIGN KEY (`iduser`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_cuentaacceso_roles` FOREIGN KEY (`idroles`) REFERENCES `roles` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
@@ -1277,7 +1277,7 @@ CREATE TABLE IF NOT EXISTS `permisosroles` (
   CONSTRAINT `FK_permisosroles_accion` FOREIGN KEY (`idaccion`) REFERENCES `acciones` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
--- Volcando datos para la tabla person.permisosroles: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla person.permisosroles: ~3 rows (aproximadamente)
 DELETE FROM `permisosroles`;
 /*!40000 ALTER TABLE `permisosroles` DISABLE KEYS */;
 INSERT INTO `permisosroles` (`id`, `idaccion`, `idrol`, `idmodulo`) VALUES
@@ -1302,7 +1302,7 @@ CREATE TABLE IF NOT EXISTS `registro` (
   CONSTRAINT `FKMUN` FOREIGN KEY (`idmunicipio`) REFERENCES `municipios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
--- Volcando datos para la tabla person.registro: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla person.registro: ~3 rows (aproximadamente)
 DELETE FROM `registro`;
 /*!40000 ALTER TABLE `registro` DISABLE KEYS */;
 INSERT INTO `registro` (`id`, `numerovalidas`, `numeroinvalidas`, `total`, `idmunicipio`, `fecha`, `idcuentaacceso`, `iduser`) VALUES
@@ -1327,9 +1327,9 @@ INSERT INTO `roles` (`id`, `nombre`, `descripcion`) VALUES
 	(1, 'ADM', 'Administrador de la herramienta');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 
--- Volcando estructura para tabla person.user
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE IF NOT EXISTS `user` (
+-- Volcando estructura para tabla person.users
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `firts_name` varchar(50) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
   `last_name` varchar(50) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
@@ -1339,15 +1339,15 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `UNQ` (`document`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
--- Volcando datos para la tabla person.user: ~3 rows (aproximadamente)
-DELETE FROM `user`;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` (`id`, `firts_name`, `last_name`, `email`, `document`) VALUES
+-- Volcando datos para la tabla person.users: ~3 rows (aproximadamente)
+DELETE FROM `users`;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` (`id`, `firts_name`, `last_name`, `email`, `document`) VALUES
 	(1, 'Jorge', 'Mojica', 'jorge.mojica92@gmail.com', '1095811763'),
 	(2, 'Jesus', 'Posso', 'jjposso@marval.com.co', '1077478028'),
 	(3, 'Deysi', 'Delgado', 'dedelgado@marval.com.co', '112547898'),
 	(4, 'Eduard', 'Cala', 'eduar.cala@gmail.com', '123456123');
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
