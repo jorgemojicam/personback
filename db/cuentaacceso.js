@@ -1,3 +1,4 @@
+require('dotenv')
 const db = require('./config')
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -59,15 +60,5 @@ async function auth(context) {
     }
 }
 module.exports.auth = auth;
-
-async function generateAuthToken() {
-
-    const token = jwt.sign({ _id: this._id }, "Stack", {
-        expiresIn: "10h"
-    }, "*/.+fMd|-*g0j*|-*hgJfg*|-*g1g*|-*fhChm*|-*4*/.*");
-
-    return token;
-};
-module.exports.generateAuthToken = generateAuthToken;
 
 

@@ -1,6 +1,8 @@
+require('dotenv').config()
 const cuentaacceso = require('../db/cuentaacceso');
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const tkn = process.env.JWT_TOKEN_SECRET
 
 async function get(req, res, next) {
     try {
@@ -46,11 +48,12 @@ async function auth(req, res) {
         if (!validPassword)
             return res.status(401).send("Invalid email or password");
 
-        const token = await cuentaacceso.generateAuthToken();
-        
+        console.log("tkkkkkkknnnnnn", tkn)
+        const token = jwt.sign({ username: user.username }, tkn, { expiresIn: '24h' });
+
         res.send({
-            AccessToken: token,
-            datauser: user[0]
+            accesToken: token,
+            dataUser: user[0]
         });
     } catch (error) {
         console.log(error);
@@ -63,7 +66,7 @@ module.exports.auth = auth;
 async function checkJWT(req, res, next) {
     try {
         const { authorization } = req.headers;
-        const decoded = jwt.verify(authorization.split(' ')[1], "*/.+\fMd|-*g0j*|-*hgJfg*|-*g1g*|-*fhChm*|-*4*/.\*");
+        const decoded = jwt.verify(authorization.split(' ')[1], tkn);
         const [usuario] = cuentaacceso.get(decoded);
         if (!usuario) {
             throw Error();

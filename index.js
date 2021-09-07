@@ -14,19 +14,6 @@ async function startup() {
   }
 }
 
-function close() {
-  return new Promise((resolve, reject) => {
-    httpServer.close((err) => {
-      if (err) {
-        reject(err);
-        return;
-      }
-      resolve();
-    });
-  });
-}
-module.exports.close = close;
-
 async function shutdown(e) {
   let err = e;
   console.log('Shutting down');

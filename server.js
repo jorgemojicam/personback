@@ -15,7 +15,7 @@ function initialize() {
     app.use(morgan('combined'));
 
     app.use(function (req, res, next) {
-      res.header("Access-Control-Allow-Origin", "http://localhost:8080"); // update to match the domain you will make the request from      
+      res.header("Access-Control-Allow-Origin", "http://localhost:8080");     
       res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
       next();
     });
@@ -23,13 +23,9 @@ function initialize() {
     app.use(bodyParser.urlencoded({ extended: false }))
     app.use(bodyParser.json()) 
 
-    app.use('/api', router);
-
     app.use(cors())
 
-    app.get('/', (req, res) => {
-      res.end('Ingrese /api para navegar!');
-    });
+    app.use('/api', router);    
 
     httpServer = http.createServer(app);
 
@@ -45,3 +41,16 @@ function initialize() {
 }
 
 module.exports.initialize = initialize; 
+
+function close() {
+  return new Promise((resolve, reject) => {
+    httpServer.close((err) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve();
+    });
+  });
+}
+module.exports.close = close;
