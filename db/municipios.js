@@ -5,7 +5,7 @@ async function get(context) {
     let arrayWhere = []
     try {
         if (context.iddepartamento) {
-            arrayWhere.push(` iddepartamento = ${context.iddepartamento}`)            
+            arrayWhere.push(` iddepartamento_mun = ${context.iddepartamento}`)            
         }        
         if(arrayWhere.length > 0){
             sqlquery += ` where ${arrayWhere.join(" and ")}`;

@@ -1,8 +1,8 @@
-const user = require('../db/municipios');
+const mun = require('../db/municipios');
 
 async function get(req, res, next) {
-    try {
-        const rows = await user.get(req.params);
+    try {     
+        const rows = await mun.get(req.params);
         if (rows) {
             if (rows.length > 0) {
                 res.status(200).json(rows);

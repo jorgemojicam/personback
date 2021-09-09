@@ -42,14 +42,13 @@ async function auth(req, res) {
 
         const validPassword = await bcrypt.compare(
             req.body.password,
-            user[0].password
+            user[0].password_cue
         );
-        delete user[0].password
+        delete user[0].password_cue
         if (!validPassword)
             return res.status(401).send("Invalid email or password");
 
-        console.log("tkkkkkkknnnnnn", tkn)
-        const token = jwt.sign({ username: user.username }, tkn, { expiresIn: '24h' });
+        const token = jwt.sign({ username: user.username_cue }, tkn, { expiresIn: '24h' });
 
         res.send({
             accesToken: token,

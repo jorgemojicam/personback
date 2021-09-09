@@ -10,15 +10,15 @@ async function get(context) {
         const binds = {};
         if (context.id) {
             binds.id = context.id;
-            arrayWhere.push(" id = :id ");
+            arrayWhere.push(" id_cue = :id ");
         }
         if (context.iduser) {
             binds.iduser = context.iduser;
-            arrayWhere.push(" iduser = :iduser ");
+            arrayWhere.push(" iduser_cue = :iduser ");
         }
         if (context.username) {
             binds.username = context.username;
-            arrayWhere.push(" username = :username ");
+            arrayWhere.push(" username_cue = :username ");
         }
         if (arrayWhere.length > 0) {
             sqlquery += ` where ${arrayWhere.join(" and ")}`
@@ -37,7 +37,7 @@ async function create(data) {
     const passcryp = await bcrypt.hash(data.password, salt);
 
     try {
-        const result = await db.pool.query("insert into cuentaacceso (username,password,iduser) values (?,?,?)", [data.username, passcryp, data.iduser]);
+        const result = await db.pool.query("insert into cuentaacceso (username_cue,password_cue,iduser_cue) values (?,?,?)", [data.username, passcryp, data.iduser]);
         return result;
     } catch (err) {
         throw err;
@@ -46,14 +46,16 @@ async function create(data) {
 module.exports.create = create;
 
 async function auth(context) {
-    let sqlquery = `select username,password,idroles,email,firts_name,last_name from cuentaacceso cas 
-                    INNER JOIN users us ON cas.iduser = us.id`
+    
+    let sqlquery = `select username_cue,password_cue,idroles_cue,email_use,nombre_use,id_use,apellido_use from cuentaacceso cas 
+                    INNER JOIN users us ON cas.iduser_cue = us.id_use`
 
     try {
         if (context.username) {
-            sqlquery += ` where username = "${context.username}" `;
+            sqlquery += ` where username_cue = "${context.username}" `;
         }
         const result = await db.pool.query(sqlquery);
+        console.log(">>>>>>>>>",result)
         return result;
     } catch (err) {
         throw err;

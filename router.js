@@ -20,7 +20,9 @@ router.get('/permisos/:id?', auth, permisos.get);
 router.post('/permisos', auth, permisos.post);
 router.put('/permisos', auth, permisos.put);
 
+//usuarios
 router.get('/user/:id?', auth, user.get);
+router.get('/user/getbycoordinador/:coordinador?', auth, user.get);
 
 router.get('/acciones/:id?', auth, acciones.get);
 

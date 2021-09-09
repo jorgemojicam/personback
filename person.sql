@@ -21,15 +21,15 @@ USE `person`;
 -- Volcando estructura para tabla person.acciones
 DROP TABLE IF EXISTS `acciones`;
 CREATE TABLE IF NOT EXISTS `acciones` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(80) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `id_acc` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_acc` varchar(80) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  PRIMARY KEY (`id_acc`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 -- Volcando datos para la tabla person.acciones: ~4 rows (aproximadamente)
 DELETE FROM `acciones`;
 /*!40000 ALTER TABLE `acciones` DISABLE KEYS */;
-INSERT INTO `acciones` (`id`, `nombre`) VALUES
+INSERT INTO `acciones` (`id_acc`, `nombre_acc`) VALUES
 	(1, 'ver'),
 	(2, 'crear'),
 	(3, 'editar'),
@@ -39,38 +39,38 @@ INSERT INTO `acciones` (`id`, `nombre`) VALUES
 -- Volcando estructura para tabla person.cuentaacceso
 DROP TABLE IF EXISTS `cuentaacceso`;
 CREATE TABLE IF NOT EXISTS `cuentaacceso` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(50) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `password` varchar(4000) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `iduser` int(11) DEFAULT NULL,
-  `idroles` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FKUSER` (`iduser`),
-  KEY `FK_cuentaacceso_roles` (`idroles`),
-  CONSTRAINT `FKUSER` FOREIGN KEY (`iduser`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_cuentaacceso_roles` FOREIGN KEY (`idroles`) REFERENCES `roles` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  `id_cue` int(11) NOT NULL AUTO_INCREMENT,
+  `username_cue` varchar(50) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `password_cue` varchar(4000) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `iduser_cue` int(11) DEFAULT NULL,
+  `idroles_cue` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_cue`) USING BTREE,
+  KEY `FKUSER` (`iduser_cue`) USING BTREE,
+  KEY `FK_cuentaacceso_roles` (`idroles_cue`) USING BTREE,
+  CONSTRAINT `FK_cuentaacceso_roles` FOREIGN KEY (`idroles_cue`) REFERENCES `roles` (`id_rol`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_cuentaacceso_users` FOREIGN KEY (`iduser_cue`) REFERENCES `users` (`id_use`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 -- Volcando datos para la tabla person.cuentaacceso: ~1 rows (aproximadamente)
 DELETE FROM `cuentaacceso`;
 /*!40000 ALTER TABLE `cuentaacceso` DISABLE KEYS */;
-INSERT INTO `cuentaacceso` (`id`, `username`, `password`, `iduser`, `idroles`) VALUES
+INSERT INTO `cuentaacceso` (`id_cue`, `username_cue`, `password_cue`, `iduser_cue`, `idroles_cue`) VALUES
 	(1, 'jorge.mojica', '$2b$10$Exvjd/Tp4H27IofsYY2SseHGPPLckTxo98qMLBkx.GIxzv/OEmCAK', 1, 1);
 /*!40000 ALTER TABLE `cuentaacceso` ENABLE KEYS */;
 
 -- Volcando estructura para tabla person.departamentos
 DROP TABLE IF EXISTS `departamentos`;
 CREATE TABLE IF NOT EXISTS `departamentos` (
-  `id` int(11) NOT NULL,
-  `codigo` int(11) DEFAULT NULL,
-  `nombre` varchar(100) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `id_dep` int(11) NOT NULL,
+  `codigo_dep` int(11) DEFAULT NULL,
+  `nombre_dep` varchar(100) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  PRIMARY KEY (`id_dep`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 -- Volcando datos para la tabla person.departamentos: ~33 rows (aproximadamente)
 DELETE FROM `departamentos`;
 /*!40000 ALTER TABLE `departamentos` DISABLE KEYS */;
-INSERT INTO `departamentos` (`id`, `codigo`, `nombre`) VALUES
+INSERT INTO `departamentos` (`id_dep`, `codigo_dep`, `nombre_dep`) VALUES
 	(5, 5, 'ANTIOQUIA'),
 	(8, 8, 'ATLANTICO'),
 	(11, 11, 'BOGOTA'),
@@ -109,15 +109,15 @@ INSERT INTO `departamentos` (`id`, `codigo`, `nombre`) VALUES
 -- Volcando estructura para tabla person.modulos
 DROP TABLE IF EXISTS `modulos`;
 CREATE TABLE IF NOT EXISTS `modulos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(80) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `id_mod` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_mod` varchar(80) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  PRIMARY KEY (`id_mod`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 -- Volcando datos para la tabla person.modulos: ~3 rows (aproximadamente)
 DELETE FROM `modulos`;
 /*!40000 ALTER TABLE `modulos` DISABLE KEYS */;
-INSERT INTO `modulos` (`id`, `nombre`) VALUES
+INSERT INTO `modulos` (`id_mod`, `nombre_mod`) VALUES
 	(1, 'Registro'),
 	(2, 'Usuarios'),
 	(3, 'Reportes');
@@ -126,19 +126,19 @@ INSERT INTO `modulos` (`id`, `nombre`) VALUES
 -- Volcando estructura para tabla person.municipios
 DROP TABLE IF EXISTS `municipios`;
 CREATE TABLE IF NOT EXISTS `municipios` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(80) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `codigodane` varchar(4) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `iddepartamento` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FKDEPTO` (`iddepartamento`),
-  CONSTRAINT `FKDEPTO` FOREIGN KEY (`iddepartamento`) REFERENCES `departamentos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  `id_mun` int(11) NOT NULL,
+  `nombre_mun` varchar(80) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `codigodane_mun` varchar(4) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `iddepartamento_mun` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_mun`) USING BTREE,
+  KEY `FK_municipios_departamentos` (`iddepartamento_mun`),
+  CONSTRAINT `FK_municipios_departamentos` FOREIGN KEY (`iddepartamento_mun`) REFERENCES `departamentos` (`id_dep`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 -- Volcando datos para la tabla person.municipios: ~1.120 rows (aproximadamente)
 DELETE FROM `municipios`;
 /*!40000 ALTER TABLE `municipios` DISABLE KEYS */;
-INSERT INTO `municipios` (`id`, `nombre`, `codigodane`, `iddepartamento`) VALUES
+INSERT INTO `municipios` (`id_mun`, `nombre_mun`, `codigodane_mun`, `iddepartamento_mun`) VALUES
 	(1, 'MEDELLIN', '001', 5),
 	(2, 'ABEJORRAL', '002', 5),
 	(3, 'ABRIAQUI', '004', 5),
@@ -1264,23 +1264,23 @@ INSERT INTO `municipios` (`id`, `nombre`, `codigodane`, `iddepartamento`) VALUES
 -- Volcando estructura para tabla person.permisosroles
 DROP TABLE IF EXISTS `permisosroles`;
 CREATE TABLE IF NOT EXISTS `permisosroles` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idaccion` int(11) DEFAULT 0,
-  `idrol` int(11) DEFAULT NULL,
-  `idmodulo` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `Índice 5` (`idaccion`,`idrol`,`idmodulo`),
-  KEY `FK__roles` (`idrol`),
-  KEY `FK__modulos` (`idmodulo`),
-  CONSTRAINT `FK__modulos` FOREIGN KEY (`idmodulo`) REFERENCES `modulos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK__roles` FOREIGN KEY (`idrol`) REFERENCES `roles` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_permisosroles_accion` FOREIGN KEY (`idaccion`) REFERENCES `acciones` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  `id_prol` int(11) NOT NULL AUTO_INCREMENT,
+  `idaccion_prol` int(11) DEFAULT 0,
+  `idrol_prol` int(11) DEFAULT NULL,
+  `idmodulo_prol` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_prol`) USING BTREE,
+  UNIQUE KEY `Índice 5` (`idaccion_prol`,`idrol_prol`,`idmodulo_prol`) USING BTREE,
+  KEY `FK__roles` (`idrol_prol`) USING BTREE,
+  KEY `FK__modulos` (`idmodulo_prol`) USING BTREE,
+  CONSTRAINT `FK_permisosroles_acciones` FOREIGN KEY (`idaccion_prol`) REFERENCES `acciones` (`id_acc`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_permisosroles_modulos` FOREIGN KEY (`idmodulo_prol`) REFERENCES `modulos` (`id_mod`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_permisosroles_roles` FOREIGN KEY (`idrol_prol`) REFERENCES `roles` (`id_rol`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 -- Volcando datos para la tabla person.permisosroles: ~3 rows (aproximadamente)
 DELETE FROM `permisosroles`;
 /*!40000 ALTER TABLE `permisosroles` DISABLE KEYS */;
-INSERT INTO `permisosroles` (`id`, `idaccion`, `idrol`, `idmodulo`) VALUES
+INSERT INTO `permisosroles` (`id_prol`, `idaccion_prol`, `idrol_prol`, `idmodulo_prol`) VALUES
 	(1, 1, 1, 1),
 	(3, 1, 1, 3),
 	(4, 3, 1, 3);
@@ -1289,23 +1289,23 @@ INSERT INTO `permisosroles` (`id`, `idaccion`, `idrol`, `idmodulo`) VALUES
 -- Volcando estructura para tabla person.registro
 DROP TABLE IF EXISTS `registro`;
 CREATE TABLE IF NOT EXISTS `registro` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `numerovalidas` int(11) DEFAULT NULL,
-  `numeroinvalidas` int(11) DEFAULT NULL,
-  `total` int(11) DEFAULT NULL,
-  `idmunicipio` int(11) DEFAULT NULL,
-  `fecha` date DEFAULT NULL,
-  `idcuentaacceso` int(11) DEFAULT NULL,
-  `iduser` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FKMUN` (`idmunicipio`),
-  CONSTRAINT `FKMUN` FOREIGN KEY (`idmunicipio`) REFERENCES `municipios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  `id_reg` int(11) NOT NULL AUTO_INCREMENT,
+  `numerovalidas_reg` int(11) DEFAULT NULL,
+  `numeroinvalidas_reg` int(11) DEFAULT NULL,
+  `total_reg` int(11) DEFAULT NULL,
+  `idmunicipio_reg` int(11) DEFAULT NULL,
+  `fecha_reg` date DEFAULT NULL,
+  `idcuentaacceso_reg` int(11) DEFAULT NULL,
+  `iduser_reg` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_reg`) USING BTREE,
+  KEY `FK_registro_municipios` (`idmunicipio_reg`),
+  CONSTRAINT `FK_registro_municipios` FOREIGN KEY (`idmunicipio_reg`) REFERENCES `municipios` (`id_mun`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 -- Volcando datos para la tabla person.registro: ~3 rows (aproximadamente)
 DELETE FROM `registro`;
 /*!40000 ALTER TABLE `registro` DISABLE KEYS */;
-INSERT INTO `registro` (`id`, `numerovalidas`, `numeroinvalidas`, `total`, `idmunicipio`, `fecha`, `idcuentaacceso`, `iduser`) VALUES
+INSERT INTO `registro` (`id_reg`, `numerovalidas_reg`, `numeroinvalidas_reg`, `total_reg`, `idmunicipio_reg`, `fecha_reg`, `idcuentaacceso_reg`, `iduser_reg`) VALUES
 	(1, 6, 1, 7, 930, '2021-09-01', 1, 1),
 	(2, 1, 1, 2, 930, '2021-09-01', 1, 1),
 	(3, 6, 1, 7, 930, '2021-09-01', 1, 1);
@@ -1314,39 +1314,40 @@ INSERT INTO `registro` (`id`, `numerovalidas`, `numeroinvalidas`, `total`, `idmu
 -- Volcando estructura para tabla person.roles
 DROP TABLE IF EXISTS `roles`;
 CREATE TABLE IF NOT EXISTS `roles` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(40) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `descripcion` varchar(200) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `id_rol` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_rol` varchar(40) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `descripcion_rol` varchar(200) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  PRIMARY KEY (`id_rol`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
--- Volcando datos para la tabla person.roles: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla person.roles: ~1 rows (aproximadamente)
 DELETE FROM `roles`;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` (`id`, `nombre`, `descripcion`) VALUES
+INSERT INTO `roles` (`id_rol`, `nombre_rol`, `descripcion_rol`) VALUES
 	(1, 'ADM', 'Administrador de la herramienta');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 
 -- Volcando estructura para tabla person.users
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `firts_name` varchar(50) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `last_name` varchar(50) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `email` varchar(50) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `document` varchar(50) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UNQ` (`document`)
+  `id_use` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_use` varchar(50) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `apellido_use` varchar(50) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `email_use` varchar(50) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `cedula_use` varchar(50) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `coordinador_use` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id_use`) USING BTREE,
+  UNIQUE KEY `UNQ` (`cedula_use`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
--- Volcando datos para la tabla person.users: ~3 rows (aproximadamente)
+-- Volcando datos para la tabla person.users: ~4 rows (aproximadamente)
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` (`id`, `firts_name`, `last_name`, `email`, `document`) VALUES
-	(1, 'Jorge', 'Mojica', 'jorge.mojica92@gmail.com', '1095811763'),
-	(2, 'Jesus', 'Posso', 'jjposso@marval.com.co', '1077478028'),
-	(3, 'Deysi', 'Delgado', 'dedelgado@marval.com.co', '112547898'),
-	(4, 'Eduard', 'Cala', 'eduar.cala@gmail.com', '123456123');
+INSERT INTO `users` (`id_use`, `nombre_use`, `apellido_use`, `email_use`, `cedula_use`, `coordinador_use`) VALUES
+	(1, 'Jorge', 'Mojica', 'jorge.mojica92@gmail.com', '1095811763', 1),
+	(2, 'Jesus', 'Posso', 'jjposso@marval.com.co', '1077478028', 0),
+	(3, 'Deysi', 'Delgado', 'dedelgado@marval.com.co', '112547898', 1),
+	(4, 'Eduard', 'Cala', 'eduar.cala@gmail.com', '123456123', 1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
