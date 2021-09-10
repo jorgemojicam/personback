@@ -31,6 +31,7 @@ router.get('/departamentos/:id?', auth, depto.get);
 
 router.get('/municipios/:iddepartamento?', auth, mun.get);
 
+//Cuenta acceso 
 router.route('/cuentaacceso').post(cuentaacceso.post);
 router.route('/cuentaacceso/auth').post(cuentaacceso.auth);
 
