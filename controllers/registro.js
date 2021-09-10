@@ -3,13 +3,8 @@ const registro = require('../db/registro');
 async function get(req, res, next) {
     try {
         const rows = await registro.get(req.params);
-
         if (rows) {
-            if (rows.length > 0) {
-                res.status(200).json(rows);
-            } else {
-                res.status(404).end();
-            }
+            res.status(200).json(rows);
         } else {
             res.status(500).end();
         }
@@ -38,5 +33,3 @@ async function put(req, res, next) {
     }
 }
 module.exports.put = put;
-
-

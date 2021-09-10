@@ -47,7 +47,7 @@ async function auth(req, res) {
         delete user[0].password_cue
         if (!validPassword)
             return res.status(401).send("Invalid email or password");
-
+            console.log("token -->>>>>>>>",tkn)
         const token = jwt.sign({ username: user.username_cue }, tkn, { expiresIn: '24h' });
 
         res.send({

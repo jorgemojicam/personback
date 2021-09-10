@@ -22,6 +22,7 @@ router.put('/permisos', auth, permisos.put);
 
 //usuarios
 router.get('/user/:id?', auth, user.get);
+router.post('/user', auth, user.post);
 router.get('/user/getbycoordinador/:coordinador?', auth, user.get);
 
 router.get('/acciones/:id?', auth, acciones.get);

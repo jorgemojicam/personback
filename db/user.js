@@ -24,7 +24,8 @@ module.exports.get = get;
 async function create(data) {
 
     try {
-        const result = await db.pool.query("insert into user (nombre_use,apellido_use,email_use,cedula_use) values (?,?,?,?)", [data.firts_name, data.last_name, data.email, data.document]);
+        console.log(">>>>>>>>>",data)
+        const result = await db.pool.query("insert into users (nombre_use,apellido_use,email_use,cedula_use) values (?,?,?,?)", [data.nombre, data.apellido, data.email, data.cedula]);
         return result;
     } catch (err) {
         throw err;
@@ -35,6 +36,7 @@ module.exports.create = create;
 async function update(data) {
 
     try {
+        console.log(">>>>>>>>>",data)
         const result = await db.pool.query("update user set nombre_use = ?, apellido_use = ?, email_use = ?, cedula_use =? where id = ?", [data.firts_name, data.last_name, data.email, data.document, data.id]);
         return send(result);
     } catch (err) {

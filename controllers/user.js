@@ -23,13 +23,7 @@ module.exports.get = get;
 
 async function post(req, res, next) {
     try {
-        let data = {
-            firts_name: req.body.firts_name,
-            last_name: req.body.last_name,
-            email: req.body.email,
-            document: req.body.document
-        }
-        newuser = await user.create(data);
+        newuser = await user.create(req.body);
         res.status(201).json(newuser);
     } catch (err) {
         next(err);
@@ -38,7 +32,7 @@ async function post(req, res, next) {
 module.exports.post = post;
 
 async function put(req, res, next) {
-    try {        
+    try {
         newuser = await user.create(req.body);
         res.status(201).json(newuser);
     } catch (err) {
