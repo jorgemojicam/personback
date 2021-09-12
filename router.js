@@ -7,6 +7,7 @@ const permisos= require('./controllers/permisosroles');
 const cuentaacceso = require('./controllers/cuentaacceso');
 const depto = require('./controllers/departamentos');
 const mun = require('./controllers/municipios');
+const rol = require('./controllers/roles');
 const auth = require('./middleware/auth');
 
 
@@ -19,6 +20,7 @@ router.put('/registro', auth, registro.put);
 router.get('/permisos/:id?', auth, permisos.get);
 router.post('/permisos', auth, permisos.post);
 router.put('/permisos', auth, permisos.put);
+router.get('/roles', auth, rol.get);
 
 //usuarios
 router.get('/user/:id?', auth, user.get);

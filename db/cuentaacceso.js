@@ -37,7 +37,7 @@ async function create(data) {
     const passcryp = await bcrypt.hash(data.password, salt);
 
     try {
-        const result = await db.pool.query("insert into cuentaacceso (username_cue,password_cue,iduser_cue) values (?,?,?)", [data.username, passcryp, data.iduser]);
+        const result = await db.pool.query("insert into cuentaacceso (username_cue,password_cue,iduser_cue,idroles_cue) values (?,?,?,?)", [data.username, passcryp, data.iduser,data.idrol]);
         return result;
     } catch (err) {
         throw err;
