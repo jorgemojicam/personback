@@ -54,8 +54,7 @@ async function auth(context) {
         if (context.username) {
             sqlquery += ` where username_cue = "${context.username}" `;
         }
-        const result = await db.pool.query(sqlquery);
-        console.log(">>>>>>>>>",result)
+        const result = await db.pool.query(sqlquery);    
         return result;
     } catch (err) {
         throw err;

@@ -13,6 +13,7 @@ const auth = require('./middleware/auth');
 
 //registro
 router.get('/registro/:id?', auth, registro.get);
+router.get('/registro/get/:iduser?', auth, registro.get);
 router.post('/registro', auth, registro.post);
 router.put('/registro', auth, registro.put);
 
