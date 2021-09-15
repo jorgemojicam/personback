@@ -1,7 +1,8 @@
 const db = require('./config')
 
 async function get(context) {
-    let sqlquery = 'select * from users '
+    let sqlquery = `select usr.*,cue.username_cue,cue.idroles_cue from users  usr left JOIN  cuentaacceso cue
+    on cue.iduser_cue = usr.id_use`
     var arrayWhere = []
     try {
         if (context.id) {
