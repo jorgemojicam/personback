@@ -26,6 +26,7 @@ router.get('/roles', auth, rol.get);
 //usuarios
 router.get('/user/:id?', auth, user.get);
 router.post('/user', auth, user.post);
+router.put('/user', auth, user.put);
 router.get('/user/getbycoordinador/:coordinador?', auth, user.get);
 
 router.get('/acciones/:id?', auth, acciones.get);

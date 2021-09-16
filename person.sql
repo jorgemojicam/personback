@@ -44,14 +44,15 @@ CREATE TABLE IF NOT EXISTS `cuentaacceso` (
   KEY `FK_cuentaacceso_roles` (`idroles_cue`) USING BTREE,
   CONSTRAINT `FK_cuentaacceso_roles` FOREIGN KEY (`idroles_cue`) REFERENCES `roles` (`id_rol`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_cuentaacceso_users` FOREIGN KEY (`iduser_cue`) REFERENCES `users` (`id_use`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
--- Volcando datos para la tabla person.cuentaacceso: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla person.cuentaacceso: ~4 rows (aproximadamente)
 DELETE FROM `cuentaacceso`;
 /*!40000 ALTER TABLE `cuentaacceso` DISABLE KEYS */;
 INSERT INTO `cuentaacceso` (`id_cue`, `username_cue`, `password_cue`, `iduser_cue`, `idroles_cue`) VALUES
 	(1, '1095811763', '$2b$10$og2RcIk9kFTVL/6NWkKSz.P/.JWZ1aJKIjt9gkrmJL6718e8e64sC', 1, NULL),
-	(3, '999999', '$2b$10$9ID4IwOWylf8wHSew176reKPPEy9fi944Da4CBOsxRUX6iyOgR0ei', 9, 1);
+	(3, '999999', '$2b$10$9ID4IwOWylf8wHSew176reKPPEy9fi944Da4CBOsxRUX6iyOgR0ei', 9, 1),
+	(4, '567', '$2b$10$g0fk2/2G.fnubikb/tBccu4KuY8qG7j0i9Do9IKW.JoWIw/RS6j5S', 14, 1);
 /*!40000 ALTER TABLE `cuentaacceso` ENABLE KEYS */;
 
 -- Volcando estructura para tabla person.departamentos
@@ -1289,15 +1290,16 @@ CREATE TABLE IF NOT EXISTS `registro` (
   PRIMARY KEY (`id_reg`) USING BTREE,
   KEY `FK_registro_municipios` (`idmunicipio_reg`),
   CONSTRAINT `FK_registro_municipios` FOREIGN KEY (`idmunicipio_reg`) REFERENCES `municipios` (`id_mun`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
--- Volcando datos para la tabla person.registro: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla person.registro: ~3 rows (aproximadamente)
 DELETE FROM `registro`;
 /*!40000 ALTER TABLE `registro` DISABLE KEYS */;
 INSERT INTO `registro` (`id_reg`, `numerovalidas_reg`, `numeroinvalidas_reg`, `total_reg`, `idmunicipio_reg`, `fecha_reg`, `idcuentaacceso_reg`, `iduser_reg`, `folio_reg`) VALUES
 	(13, 24, 2, 26, 126, '2021-09-09 00:00:00', 1, 1, 12),
 	(14, 2, 2, 4, 129, '2021-09-09 00:00:00', 1, 1, 2),
-	(15, 2, 3, 5, 149, '2021-09-09 00:00:00', 1, 1, 23);
+	(15, 2, 3, 5, 149, '2021-09-09 00:00:00', 1, 1, 23),
+	(16, 5, 6, 11, 3, '2021-09-09 00:00:00', 1, 9, 4);
 /*!40000 ALTER TABLE `registro` ENABLE KEYS */;
 
 -- Volcando estructura para tabla person.roles
@@ -1329,16 +1331,20 @@ CREATE TABLE IF NOT EXISTS `users` (
   `coordinador_use` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id_use`) USING BTREE,
   UNIQUE KEY `UNQ` (`cedula_use`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
--- Volcando datos para la tabla person.users: ~3 rows (aproximadamente)
+-- Volcando datos para la tabla person.users: ~7 rows (aproximadamente)
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id_use`, `nombre_use`, `apellido_use`, `email_use`, `cedula_use`, `coordinador_use`) VALUES
 	(1, 'Jorge Enrique', 'Mojica Martinez', 'jorge.mojica@gmail.com', '1095811763', 1),
 	(8, 'carlos', 'bustos', 'jcasdfsadf', '1089745', NULL),
 	(9, 'pepito', 'perez', 'pepito', '999999', 1),
-	(10, 'fulanito', 'de tal', 'fulano', '88888', 1);
+	(10, 'fulanito', 'de tal', 'fulano', '88888', 1),
+	(11, 'kaka', 'bnsarios', 'jopsjf', '8521478', 1),
+	(12, 'fgh', 'dfgh', 'gfh', '456334536', 0),
+	(14, 'fgjh', 'fgjh', 'fj', '567', 0),
+	(15, 'lui', 'fgjh', 'fj', '5679999', 0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

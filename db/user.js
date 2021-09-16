@@ -1,7 +1,7 @@
 const db = require('./config')
 
 async function get(context) {
-    let sqlquery = `select usr.*,cue.username_cue,cue.idroles_cue from users  usr left JOIN  cuentaacceso cue
+    let sqlquery = `select usr.*,cue.username_cue,cue.idroles_cue from users usr left JOIN  cuentaacceso cue
     on cue.iduser_cue = usr.id_use`
     var arrayWhere = []
     try {
@@ -34,7 +34,7 @@ module.exports.create = create;
 
 async function update(data) {
     try {      
-        const result = await db.pool.query("update user set nombre_use = ?, apellido_use = ?, email_use = ?, cedula_use =?,coordinador_use=? where id = ?", [data.firts_name, data.apellido, data.email, data.cedula, data.coordinador, data.id]);
+        const result = await db.pool.query("update user set nombre_use = ?, apellido_use = ?, email_use = ?, cedula_use =?,coordinador_use=? where id_use = ?", [data.nombre, data.apellido, data.email, data.cedula, data.coordinador, data.iduser]);
         return send(result);
     } catch (err) {
         throw err;
