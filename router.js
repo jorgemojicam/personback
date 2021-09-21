@@ -12,8 +12,8 @@ const auth = require('./middleware/auth');
 
 
 //registro
-router.get('/registro/:id?', auth, registro.get);
-router.get('/registro/get/:iduser?', auth, registro.get);
+router.get('/registro/:iduser?', auth, registro.get);
+router.get('/registro/getbyfilters/:filters?', auth, registro.getbyfilters);
 router.post('/registro', auth, registro.post);
 router.put('/registro', auth, registro.put);
 
@@ -37,6 +37,7 @@ router.get('/municipios/:iddepartamento?', auth, mun.get);
 
 //Cuenta acceso 
 router.route('/cuentaacceso').post(cuentaacceso.post);
+router.route('/cuentaacceso').put(cuentaacceso.put);
 router.route('/cuentaacceso/auth').post(cuentaacceso.auth);
 
 module.exports = router;

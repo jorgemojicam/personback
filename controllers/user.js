@@ -33,7 +33,7 @@ module.exports.post = post;
 
 async function put(req, res, next) {
     try {
-        newuser = await user.create(req.body);
+        newuser = await user.update(req.body);
         res.status(201).json(newuser);
     } catch (err) {
         next(err);

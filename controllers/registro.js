@@ -33,3 +33,17 @@ async function put(req, res, next) {
     }
 }
 module.exports.put = put;
+
+async function getbyfilters(req, res, next) {
+    try {
+        const rows = await registro.getByFilters(req.params);
+        if (rows) {
+            res.status(200).json(rows);
+        } else {
+            res.status(500).end();
+        }
+    } catch (err) {
+        next(err);
+    }
+}
+module.exports.getbyfilters = getbyfilters;

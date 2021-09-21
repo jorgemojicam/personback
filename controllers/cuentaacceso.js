@@ -35,6 +35,16 @@ async function post(req, res, next) {
 }
 module.exports.post = post;
 
+async function put(req, res, next) {
+    try {
+        newuser = await cuentaacceso.update(req.body);
+        res.status(201).json(newuser);
+    } catch (err) {
+        next(err);
+    }
+}
+module.exports.put = put;
+
 async function auth(req, res) {
     try {
         const user = await cuentaacceso.auth(req.body);

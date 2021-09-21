@@ -37,7 +37,7 @@ async function create(data) {
     const passcryp = await bcrypt.hash(data.password, salt);
 
     try {
-        const result = await db.pool.query("insert into cuentaacceso (username_cue,password_cue,iduser_cue,idroles_cue) values (?,?,?,?)", [data.username, passcryp, data.iduser,data.idrol]);
+        const result = await db.pool.query("insert into cuentaacceso (username_cue,password_cue,iduser_cue,idroles_cue) values (?,?,?,?)", [data.username, passcryp, data.iduser, data.idrol]);
         return result;
     } catch (err) {
         throw err;
@@ -45,8 +45,22 @@ async function create(data) {
 }
 module.exports.create = create;
 
+async function update(data) {
+
+    const salt = await bcrypt.genSalt(Number(process.env.SALT));
+    const passcryp = await bcrypt.hash(data.password, salt);
+
+    try {
+        const result = await db.pool.query("update cuentaacceso set password_cue = ?, idroles_cue= ? where id_cue = ?)", [passcryp, data.idrol, data.id]);
+        return result;
+    } catch (err) {
+        throw err;
+    }
+}
+module.exports.update = update;
+
 async function auth(context) {
-    
+
     let sqlquery = `select username_cue,password_cue,idroles_cue,email_use,nombre_use,id_use,apellido_use from cuentaacceso cas 
                     INNER JOIN users us ON cas.iduser_cue = us.id_use`
 
@@ -54,12 +68,10 @@ async function auth(context) {
         if (context.username) {
             sqlquery += ` where username_cue = "${context.username}" `;
         }
-        const result = await db.pool.query(sqlquery);    
+        const result = await db.pool.query(sqlquery);
         return result;
     } catch (err) {
         throw err;
     }
 }
 module.exports.auth = auth;
-
-

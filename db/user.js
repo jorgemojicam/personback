@@ -34,7 +34,7 @@ module.exports.create = create;
 
 async function update(data) {
     try {      
-        const result = await db.pool.query("update user set nombre_use = ?, apellido_use = ?, email_use = ?, cedula_use =?,coordinador_use=? where id_use = ?", [data.nombre, data.apellido, data.email, data.cedula, data.coordinador, data.iduser]);
+        const result = await db.pool.query("update users set nombre_use = ?, apellido_use = ?, email_use = ?, cedula_use =?,coordinador_use=? where id_use = ?", [data.nombre, data.apellido, data.email, data.cedula, data.coordinador, data.iduser]);
         return send(result);
     } catch (err) {
         throw err;
