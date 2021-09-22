@@ -18,11 +18,11 @@ async function getByRol(context) {
     let sqlquery = `SELECT 
                     mo.nombre_mod,
                     mo.id_mod,
-                    (SELECT id_prol FROM permisosroles WHERE idmodulo_prol = mo.id_mod AND idrol_prol = ${context.id}) id,
-                    (SELECT ver_prol FROM permisosroles WHERE idmodulo_prol = mo.id_mod AND idrol_prol = ${context.id}) ver,
-                    (SELECT editar_prol FROM permisosroles WHERE idmodulo_prol = mo.id_mod AND idrol_prol = ${context.id}) editar,
-                    (SELECT crear_prol FROM permisosroles WHERE idmodulo_prol = mo.id_mod AND idrol_prol = ${context.id}) crear,
-                    (SELECT ver_prol FROM permisosroles WHERE idmodulo_prol = mo.id_mod AND idrol_prol = ${context.id}) ver
+                    (SELECT id_prol FROM permisosroles WHERE idmodulo_prol = mo.id_mod AND idrol_prol = ${context.idrol}) id,
+                    (SELECT ver_prol FROM permisosroles WHERE idmodulo_prol = mo.id_mod AND idrol_prol = ${context.idrol}) ver,
+                    (SELECT editar_prol  FROM permisosroles WHERE idmodulo_prol = mo.id_mod AND idrol_prol = ${context.idrol}) editar,
+                    (SELECT crear_prol FROM permisosroles WHERE idmodulo_prol = mo.id_mod AND idrol_prol = ${context.idrol}) crear,
+                    (SELECT eliminar_prol FROM permisosroles WHERE idmodulo_prol = mo.id_mod AND idrol_prol = ${context.idrol}) eliminar
                     FROM modulos mo`
     try {                
         const result = await db.pool.query(sqlquery);        
