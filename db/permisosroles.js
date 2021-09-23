@@ -24,7 +24,7 @@ module.exports.get = get;
 async function create(data) {
 
     try {
-        const result = await db.pool.query("INSERT INTO permisosroles (idaccion_prol, idrol_prol, idmodulo_prol) VALUES (?, ?, ?)", [data.idaccion, data.idrol, data.idmodulo]);
+        const result = await db.pool.query("INSERT INTO permisosroles (idrol_prol, idmodulo_prol,ver_prol,crear_prol,editar_prol,eliminar_prol) VALUES (?, ?, ?,?,?,?)", [data.idrol, data.idmodulo, data.ver, data.crear, data.editar, data.eliminar]);
         return result;
     } catch (err) {
         throw err;
@@ -35,12 +35,10 @@ module.exports.create = create;
 async function update(data) {
 
     try {
-        const result = await db.pool.query("UPDATE permisosroles SET idmodulo_prol=?,idrol_prol =?, idaccion_prol =? WHERE  id_prol=?", [data.idmodulo, data.idrol, data.idaccion, data.id]);
+        const result = await db.pool.query("UPDATE permisosroles SET idmodulo_prol=?,idrol_prol =?,ver_prol=?,editar_prol =?,crear_prol = ?, eliminar_prol = ? WHERE  id_prol=?", [data.idmodulo, data.idrol, data.ver, data.editar, data.crear, data.eliminar, data.id]);
         return result;
     } catch (err) {
         throw err;
     }
 }
 module.exports.update = update;
-
-//UPDATE ;

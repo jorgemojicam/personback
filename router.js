@@ -10,7 +10,6 @@ const rol = require('./controllers/roles');
 const modulos = require('./controllers/modulos');
 const auth = require('./middleware/auth');
 
-
 //registro
 router.get('/registro/:iduser?', auth, registro.get);
 router.get('/registro/getbyfilters/:filters?', auth, registro.getbyfilters);
