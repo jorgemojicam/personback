@@ -94,17 +94,19 @@ DROP TABLE IF EXISTS `modulos`;
 CREATE TABLE IF NOT EXISTS `modulos` (
   `id_mod` int(11) NOT NULL AUTO_INCREMENT,
   `nombre_mod` varchar(80) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `ruta_mod` varchar(50) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `icono_mod` varchar(50) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
   PRIMARY KEY (`id_mod`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
--- Volcando datos para la tabla person.modulos: ~3 rows (aproximadamente)
+-- Volcando datos para la tabla person.modulos: ~4 rows (aproximadamente)
 DELETE FROM `modulos`;
 /*!40000 ALTER TABLE `modulos` DISABLE KEYS */;
-INSERT INTO `modulos` (`id_mod`, `nombre_mod`) VALUES
-	(1, 'Registro'),
-	(2, 'Usuarios'),
-	(3, 'Reporte'),
-	(7, 'Permisos');
+INSERT INTO `modulos` (`id_mod`, `nombre_mod`, `ruta_mod`, `icono_mod`) VALUES
+	(1, 'Registro', 'Registro', 'mdi-clipboard-check-outline'),
+	(2, 'Usuarios', 'Usuarios', 'mdi-account-circle'),
+	(3, 'Reporte', 'Reporte', 'mdi-chart-box-outline'),
+	(7, 'Permisos', 'Permisos', 'mdi-lock-check-outline');
 /*!40000 ALTER TABLE `modulos` ENABLE KEYS */;
 
 -- Volcando estructura para tabla person.municipios
@@ -1291,7 +1293,7 @@ CREATE TABLE IF NOT EXISTS `registro` (
   CONSTRAINT `FK_registro_municipios` FOREIGN KEY (`idmunicipio_reg`) REFERENCES `municipios` (`id_mun`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
--- Volcando datos para la tabla person.registro: ~3 rows (aproximadamente)
+-- Volcando datos para la tabla person.registro: ~4 rows (aproximadamente)
 DELETE FROM `registro`;
 /*!40000 ALTER TABLE `registro` DISABLE KEYS */;
 INSERT INTO `registro` (`id_reg`, `numerovalidas_reg`, `numeroinvalidas_reg`, `total_reg`, `idmunicipio_reg`, `fecha_reg`, `idcuentaacceso_reg`, `iduser_reg`, `folio_reg`) VALUES
