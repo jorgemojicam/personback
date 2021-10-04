@@ -11,7 +11,7 @@ async function get(context) {
                     (SELECT eliminar_prol FROM permisosroles WHERE idmodulo_prol = mo.id_mod AND idrol_prol = ${context.idrol}) eliminar
                     FROM modulos mo`
     try {
-        
+
         const result = await db.pool.query(sqlquery);
         return result;
     } catch (err) {
@@ -21,6 +21,7 @@ async function get(context) {
 module.exports.get = get;
 
 async function getByRol(context) {
+
     let sqlquery = `SELECT
                     mo.id_mod,
                     mo.nombre_mod,
@@ -32,6 +33,12 @@ async function getByRol(context) {
                     (SELECT crear_prol FROM permisosroles WHERE idmodulo_prol = mo.id_mod AND idrol_prol = ${context.idrol}) crear,
                     (SELECT eliminar_prol FROM permisosroles WHERE idmodulo_prol = mo.id_mod AND idrol_prol = ${context.idrol}) eliminar
                     FROM modulos mo`
+
+    if (context.ver) {
+        sqlquery += ` where (SELECT ver_prol FROM permisosroles WHERE idmodulo_prol = mo.id_mod AND idrol_prol = ${context.idrol}) = ${context.ver}`
+    }
+    console.log("llego aqui", sqlquery)
+
     try {
         const result = await db.pool.query(sqlquery);
         return result;

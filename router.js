@@ -25,7 +25,7 @@ router.put('/permisos', auth, permisos.put);
 router.get('/roles', auth, rol.get);
 
 //modulos
-router.get('/modulos/getbyrol/:idrol?', auth, modulos.getbyrol);
+router.get('/modulos/getbyrol/:idrol?/:ver?', auth, modulos.getbyrol);
 
 //usuarios
 router.get('/user/:id?', auth, user.get);

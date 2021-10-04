@@ -18,7 +18,8 @@ module.exports.get = get;
 
 async function getbyrol(req, res, next) {
     try { 
-        const rows = await rol.getByRol(req.params);
+    
+        const rows = await rol.getByRol(req.query);
         if (rows) {
             if (rows.length > 0) {
                 res.status(200).json(rows);
