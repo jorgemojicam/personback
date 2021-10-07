@@ -29,14 +29,7 @@ function initialize() {
 
     httpServer = http.createServer(app);
 
-    httpServer.listen(3000, err => {
-      if (err) {
-        reject(err);
-        return;
-      }
-      console.log(`Web server listening on localhost:3000`);
-      resolve();
-    });
+    httpServer.listen();
   });
 }
 

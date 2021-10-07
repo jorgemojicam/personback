@@ -10,6 +10,11 @@ const rol = require('./controllers/roles');
 const modulos = require('./controllers/modulos');
 const auth = require('./middleware/auth');
 
+router.get('/', function (req, res) {
+res.send('Aca la aplicacion ya esta corriendo ')
+})
+router.get('/registros/:iduser?',  registro.get);
+
 //registro
 router.get('/registro/:iduser?', auth, registro.get);
 router.get('/registro/getbyfilters/:filters?', auth, registro.getbyfilters);

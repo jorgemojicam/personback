@@ -16,7 +16,7 @@ async function get(req, res, next) {
             } else {
                 res.status(404).end();
             }
-        } else {
+        } else { 
             res.status(200).json(rows);
         }
     } catch (err) {
@@ -47,6 +47,7 @@ module.exports.put = put;
 
 async function auth(req, res) {
     try {
+        
         const user = await cuentaacceso.auth(req.body);
         if (!user) return res.status(400).send("Usuario o contraseña incorrecto");
 
